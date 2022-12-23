@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Precio de Oferta',
+      home: ProductoScreen(),
+    );
+  }
+}
+
+class ProductoScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Creamos un objeto Producto con un precio y un precio de oferta
+    final Producto producto = Producto(
+      precio: '\$10',
+      precioOferta: '\$5',
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Precio de Oferta'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Producto',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          // Verificamos si el producto tiene un precio de oferta y mostramos el precio adecuado
+          Text(
+            producto.precioOferta != null ? producto.precioOferta : producto.precio,
+            style: TextStyle(
+              color: producto.precioOferta != null ? Colors.red : Colors.black,
+              fontSize: 16,
+              decoration: producto.precioOferta != null ? TextDecoration.lineThrough : TextDecoration.none,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Producto {
+  final String precio;
+  final String precioOferta;
+
+  Producto({
+    this.precio,
+    this.precioOferta,
+  });
+}
